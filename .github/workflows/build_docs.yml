@@ -15,20 +15,23 @@ jobs:
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
-  
+      with:
+        node-version: '16'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Build documentation
+    - name: Install Pandoc
+      run: sudo apt-get install -y pandoc
+
+    - name: Build documentation with Pandoc
       run: |
-        npm install -g markdown-include
-        markdown-include -i doc/main.md -c doc/markdown_include.json -o README.md
+        pandoc -s doc/main.md -o README.md
 
     - name: Commit changes
       run: |
         git config --local user.name "github-actions[bot]"
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git add README.md
-        git commit -m "Generate README from doc folder" || echo "No changes to commit"
+        git commit -m "Generate README from doc folder using Pandoc" || echo "No changes to commit"
         git push origin main
