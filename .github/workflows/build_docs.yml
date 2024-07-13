@@ -1,0 +1,35 @@
+name: Build Docs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install markdown-include
+      run: |
+        pip install markdown-include
+
+    - name: Generate documentation
+      run: |
+        markdown-include readmeinput.md -c markdown_include.json > README.md
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add README.md
+        git commit -m 'Automated documentation update'
+        git push
