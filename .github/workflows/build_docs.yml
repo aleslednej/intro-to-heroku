@@ -15,15 +15,19 @@ jobs:
       with:
         node-version: '16'
 
-    - name: Install markdown-include and markdown-it
-      run: |
-        npm install -g markdown-include
-        npm install -g markdown-it
+    - name: Install markdown-include
+      run: npm install -g markdown-include
 
-    - name: Generate Output
+    - name: Generate README.md
       run: |
-        markdown-include -i main.md -c markdown_include.json -o output.md
+        markdown-include -i main.md -c markdown_include.json -o README.md
 
-    - name: Convert Markdown to HTML
+    - name: Commit and push README.md
       run: |
-        npx markdown-it output.md -o output.html
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add README.md
+        git commit -m 'Update README.md'
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
