@@ -27,7 +27,6 @@ ERP systém vygeneruje fakturu pro objednávku.
 Systém odešle potvrzení o přijetí objednávky zákazníkovi.
 
 ## Diagram Přenosu Objednávky
-## Diagram Přenosu Objednávky
 <!--@include:./diagram.md-->
 
 
