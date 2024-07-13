@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build README
 
 on: [push]
 
@@ -19,8 +19,7 @@ jobs:
       run: npm install -g markdown-include
 
     - name: Generate README.md
-      run: |
-        markdown-include -i main.md -c markdown_include.json -o README.md
+      run: markdown-include -i docs/main.md -c docs/markdown_include.json -o README.md
 
     - name: Commit and push README.md
       run: |
