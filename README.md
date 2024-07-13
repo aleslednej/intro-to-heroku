@@ -1,11 +1,39 @@
-DreamHouse Web App
-------------------
+# Dokumentace Přenosu Objednávky do ERP Systému
 
-This application is a mobile web app for DreamHouse Realty. It will run on Heroku and use Heroku Connect to get data from Salesforce.
+Tento dokument popisuje proces přenosu objednávky do ERP systému.
 
-This application is designed for the Trailhead Project [Develop a Heroku App That Integrates with Salesforce](https://trailhead.salesforce.com/content/learn/projects/develop-heroku-applications).
+## Krok 1: Zadání objednávky
+Zákazník zadá objednávku na webových stránkách.
 
-<!-- a href="https://heroku.com/deploy">
-  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
-</a -->
-<a href="https://heroku.com/deploy"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy"></a>
+## Krok 2: Validace objednávky
+Systém zkontroluje, zda jsou všechny údaje objednávky správné a kompletní.
+
+## Krok 3: Kontrola dostupnosti zboží
+Systém ověří, zda je objednané zboží skladem.
+
+## Krok 4: Vytvoření objednávky
+Systém vytvoří objednávku a přiřadí jí jedinečné ID.
+
+## Krok 5: Odeslání objednávky do ERP
+Systém přenese údaje objednávky do ERP systému.
+
+## Krok 6: Potvrzení objednávky v ERP
+ERP systém přijme objednávku a potvrdí její přijetí.
+
+## Krok 7: Generování faktury
+ERP systém vygeneruje fakturu pro objednávku.
+
+## Krok 8: Odeslání potvrzení zákazníkovi
+Systém odešle potvrzení o přijetí objednávky zákazníkovi.
+
+## Diagram Přenosu Objednávky
+
+```mermaid
+flowchart TD
+    A[Zadání objednávky] --> B[Validace objednávky]
+    B --> C[Kontrola dostupnosti zboží]
+    C --> D[Vytvoření objednávky]
+    D --> E[Odeslání objednávky do ERP]
+    E --> F[Potvrzení objednávky v ERP]
+    F --> G[Generování faktury]
+    G --> H[Odeslání potvrzení zákazníkovi]
