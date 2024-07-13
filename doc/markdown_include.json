@@ -1,0 +1,8 @@
+{
+  "base_dir": "",
+  "include_dir": "",
+  "build_dir": "",
+  "files": {
+    "docs/main.md": "README.md"
+  }
+}
