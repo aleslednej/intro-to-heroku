@@ -1,13 +1,16 @@
-name: Build README
+name: Build and Deploy
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Set up Node.js
@@ -15,18 +18,18 @@ jobs:
       with:
         node-version: '16'
 
-    - name: Install markdown-include
-      run: npm install -g markdown-include
+    - name: Install dependencies
+      run: npm install
 
-    - name: Generate README.md
-      run: markdown-include -i docs/main.md -c docs/markdown_include.json -o README.md
-
-    - name: Commit and push README.md
+    - name: Build documentation
       run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        npm install -g markdown-include
+        markdown-include -i doc/main.md -c doc/markdown_include.json -o README.md
+
+    - name: Commit changes
+      run: |
+        git config --local user.name "github-actions[bot]"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git add README.md
-        git commit -m 'Update README.md'
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        git commit -m "Generate README from doc folder" || echo "No changes to commit"
+        git push origin main
